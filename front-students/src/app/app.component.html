@@ -1,17 +1,20 @@
-
-<main class="flex flex-col w-full h-screen">
+<main class="flex h-screen w-full flex-col">
   <div class="flex items-center justify-between space-y-2 p-8">
     <div>
       <h1 class="text-2xl font-bold tracking-tight">Dashboard de Estudantes</h1>
-      <p class="text-muted-foreground">Gerencie todos os estudantes do sistema aqui.</p>
+      <p class="text-muted-foreground">
+        Gerencie todos os estudantes do sistema aqui.
+      </p>
     </div>
     <div class="flex items-center space-x-2">
-    <app-new-student-dialog-opener link="/novo"></app-new-student-dialog-opener>
+      <app-new-student-dialog-opener
+        link="/novo"
+      ></app-new-student-dialog-opener>
     </div>
   </div>
   <div class="p-8 pt-0">
     <!-- <StudentTable /> -->
-     <app-table-students></app-table-students>
+    <app-table-students></app-table-students>
   </div>
 </main>
 
@@ -22,6 +25,5 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 
 <router-outlet />

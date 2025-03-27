@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ButtonComponent } from "./components/button/button.component";
-import { TableStudentsComponent } from "./components/table-students/table-students.component";
+import { Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { ButtonComponent } from './components/button/button.component'
+import { TableStudentsComponent } from './components/table-students/table-students.component'
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,5 @@ import { TableStudentsComponent } from "./components/table-students/table-studen
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'front-students';
+  title = 'front-students'
 }
