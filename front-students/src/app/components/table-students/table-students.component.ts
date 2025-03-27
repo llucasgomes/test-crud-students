@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core'
+import { AfterViewInit, Component, ViewChild } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'
 import { MatTableDataSource, MatTableModule } from '@angular/material/table'
@@ -70,7 +70,7 @@ export class TableStudentsComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator
   }
 

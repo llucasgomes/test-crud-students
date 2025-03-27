@@ -26,8 +26,11 @@
     class="flex flex-col-reverse gap-4 sm:flex-row sm:justify-end sm:space-x-2"
     mat-dialog-actions
   >
-    <button mat-button class="" (click)="cancelDialog()">Cancelar</button>
     <button
+    type="button"
+    mat-button class="" (click)="cancelDialog()">Cancelar</button>
+    <button
+    type="button"
       mat-button
       class="rounded-md bg-green-400 px-4 py-2 text-lg text-gray-900 hover:bg-green-500"
       (click)="closeDialog()"

@@ -36,8 +36,12 @@
     <ng-container matColumnDef="actions">
       <th class="text-center" mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-button (click)="onEdit(element)">Edit</button>
-        <button mat-button (click)="onDelete(element)">Delete</button>
+        <button 
+        type="button"
+        mat-button (click)="onEdit(element)">Edit</button>
+        <button
+        type="button"
+        mat-button (click)="onDelete(element)">Delete</button>
       </td>
     </ng-container>
 
