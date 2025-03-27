@@ -1,0 +1,33 @@
+
+
+<div class="p-10 w-[450px] ">
+  <div class="flex flex-col space-y-1.5 text-center sm:text-left ">
+    <h2 class="text-xl font-semibold leading-none " >Cadastrar Aluno</h2>
+    <h3 class="text-sm text-muted-foreground">Insira os dados do aluno</h3>
+  </div>
+  <div  mat-dialog-content class=" px-0" >
+    <form class="flex flex-col gap-4 text-center sm:text-left py-3 ">
+      <input 
+      class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" 
+      matInput placeholder="Nome" >
+      <input 
+      class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" 
+      matInput placeholder="Email">
+      <input 
+        class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" 
+        matInput placeholder="Curso">
+    </form>
+  </div>
+  <div
+  class="flex flex-col-reverse gap-4 sm:flex-row sm:justify-end sm:space-x-2"
+  mat-dialog-actions>
+    <button 
+    mat-button
+    class=""
+      (click)="cancelDialog()">Cancelar</button>
+    <button 
+    mat-button 
+    class="bg-green-400 px-4 py-2 rounded-md text-lg hover:bg-green-500 text-gray-900"
+    (click)="closeDialog()">Salvar</button>
+  </div>
+</div>
