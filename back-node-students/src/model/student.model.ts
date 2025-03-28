@@ -1,47 +1,42 @@
-import { Student } from "@prisma/client";
-import { prisma } from "../lib/prisma-client";
+import { Student } from '@prisma/client'
+import { prisma } from '../lib/prisma-client'
 
+export type CreateStudentDTO = Pick<Student, 'name' | 'email' | 'course'>
 
-export type CreateStudentDTO = Pick<Student, "name" | "email" | "course">
-
-export const getAllStudentModel =async ()=>{
+export const getAllStudentModel = async () => {
   return await prisma.student.findMany()
 }
 
-export const getStudentByIdModel = async(id:string)=>{
-  return await prisma.student.findUnique(
-    {
-      where:{id}
-    }
-  )
+export const getStudentByIdModel = async (id: string) => {
+  return await prisma.student.findUnique({
+    where: { id },
+  })
 }
-export const getStudentByEmailModel = async(email:string)=>{
-  return await prisma.student.findUnique(
-    {
-      where:{email}
-    }
-  )
+export const getStudentByEmailModel = async (email: string) => {
+  return await prisma.student.findUnique({
+    where: { email },
+  })
 }
 
-export const createStudentModel = async(student:CreateStudentDTO)=>{
+export const createStudentModel = async (student: CreateStudentDTO) => {
   return await prisma.student.create({
-    data:{
-      ...student
-    }
+    data: {
+      ...student,
+    },
   })
 }
 
-export const deleteStudentModel = async (id:string)=>{
+export const deleteStudentModel = async (id: string) => {
   return await prisma.student.delete({
-    where:{id}
+    where: { id },
   })
 }
 
-export const updateStudentByIdModel =async (id:string,student:Student)=>{
+export const updateStudentByIdModel = async (id: string, student: Student) => {
   return prisma.student.update({
-    where:{id},
-    data:{
-      ...student
-    }
+    where: { id },
+    data: {
+      ...student,
+    },
   })
-} 
+}
