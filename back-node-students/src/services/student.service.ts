@@ -44,9 +44,9 @@ export const updateStudentService = async (
         .send({ message: 'Não foi encontrado o Estudante no banco de dados' })
       return
     }
-    await updateStudentByIdModel(id, data)
+    const update = await updateStudentByIdModel(id, data)
 
-    return res.status(200).send(studentExist)
+    return res.status(200).send(update)
   } catch (error) {
     console.log('Erro Interno no servidor', error)
     res.status(500).send({ message: 'Erro interno no servidor' })
