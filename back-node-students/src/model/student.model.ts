@@ -1,6 +1,8 @@
-import { Student } from "@prisma/client"
-import { prisma } from "../lib/prisma-client"
+import { Student } from "@prisma/client";
+import { prisma } from "../lib/prisma-client";
 
+
+export type CreateStudentDTO = Pick<Student, "name" | "email" | "course">
 
 export const getAllStudentModel =async ()=>{
   return await prisma.student.findMany()
@@ -21,7 +23,7 @@ export const getStudentByEmailModel = async(email:string)=>{
   )
 }
 
-export const createStudentModel = async(student:Student)=>{
+export const createStudentModel = async(student:CreateStudentDTO)=>{
   return await prisma.student.create({
     data:{
       ...student
