@@ -13,6 +13,13 @@ export const getStudentByIdModel = async(id:string)=>{
     }
   )
 }
+export const getStudentByEmailModel = async(email:string)=>{
+  return await prisma.student.findUnique(
+    {
+      where:{email}
+    }
+  )
+}
 
 export const createStudentModel = async(student:Student)=>{
   return await prisma.student.create({
