@@ -2,11 +2,11 @@ import { Student } from "@prisma/client"
 import { prisma } from "../lib/prisma-client"
 
 
-export const getAllStudent =async ()=>{
+export const getAllStudentModel =async ()=>{
   return await prisma.student.findMany()
 }
 
-export const getStudentById = async(id:string)=>{
+export const getStudentByIdModel = async(id:string)=>{
   return await prisma.student.findUnique(
     {
       where:{id}
@@ -14,7 +14,7 @@ export const getStudentById = async(id:string)=>{
   )
 }
 
-export const createStudent = async(student:Student)=>{
+export const createStudentModel = async(student:Student)=>{
   return await prisma.student.create({
     data:{
       ...student
@@ -22,13 +22,13 @@ export const createStudent = async(student:Student)=>{
   })
 }
 
-export const deleteStudent = async (id:string)=>{
+export const deleteStudentModel = async (id:string)=>{
   return await prisma.student.delete({
     where:{id}
   })
 }
 
-export const updateStudentById =async (id:string,student:Student)=>{
+export const updateStudentByIdModel =async (id:string,student:Student)=>{
   return prisma.student.update({
     where:{id},
     data:{
