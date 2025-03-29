@@ -7,7 +7,7 @@
       </p>
     </div>
     <div class="flex items-center space-x-2">
-      <app-new-student-dialog-opener></app-new-student-dialog-opener>
+      <app-new-student-dialog-opener (studentAdded)="addNewStudent($event)"></app-new-student-dialog-opener>
     </div>
   </div>
   <div class="p-8 pt-0">

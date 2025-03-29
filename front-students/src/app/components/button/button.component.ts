@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core'
+import { Component, EventEmitter, inject, Output } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'
+import { Student } from '../../@types'
 import { DialogContentComponent } from '../dialog/dialog-content.component'
 
 @Component({
@@ -10,6 +11,7 @@ import { DialogContentComponent } from '../dialog/dialog-content.component'
   styleUrl: './button.component.css'
 })
 export class ButtonComponent {
+  @Output() studentAdded = new EventEmitter<Student>()
   readonly dialog = inject(MatDialog) // Injeção do MatDialog
 
   // Método para abrir o diálogo
@@ -17,7 +19,7 @@ export class ButtonComponent {
     const dialogRef = this.dialog.open(DialogContentComponent) // Abre o componente DialogContentComponent
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Resultado do diálogo:', result) // Exibe o valor após o fechamento do diálogo
+      result && this.studentAdded.emit(result)
     })
   }
 }

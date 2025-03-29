@@ -1,7 +1,8 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, Output } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { MatDialogRef } from '@angular/material/dialog'
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { Student } from '../../@types'
 
 // Definindo a interface dos dados do diálogo
 export interface DialogData {
@@ -16,13 +17,29 @@ export interface DialogData {
   styleUrls: ['./dialog-content.component.css'] // Corrigido de 'styleUrl' para 'styleUrls'
 })
 export class DialogContentComponent {
-  inputValue: string = '' // Variável para armazenar o valor do input
+  @Output() addStudent = new EventEmitter<Student>()
+
+  name: string = ''
+  email: string = ''
+  course: string = ''
 
   constructor(private dialogRef: MatDialogRef<DialogContentComponent>) {}
 
   // Método para fechar o diálogo e passar o valor do input
-  closeDialog(): void {
-    this.dialogRef.close(this.inputValue) // Fecha o diálogo e retorna o valor do input
+  salvar(): void {
+    if (!this.name || !this.course || !this.email) {
+      alert('Preencha todos os dados')
+      return
+    }
+
+    const newStudent = {
+      name: this.name,
+      email: this.email,
+      course: this.course
+    }
+
+    // this.addStudent.emit(newStudent)
+    this.dialogRef.close(newStudent)
   }
 
   // Método para cancelar (fechar sem passar valor)

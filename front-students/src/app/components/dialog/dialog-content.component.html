@@ -9,16 +9,22 @@
         class="border-input file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
         matInput
         placeholder="Nome"
+        [(ngModel)]="name"
+        name="name"
       />
       <input
         class="border-input file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
         matInput
         placeholder="Email"
+        [(ngModel)]="email"
+        name="email"
       />
       <input
         class="border-input file:text-foreground placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
         matInput
         placeholder="Curso"
+        [(ngModel)]="course"
+        name="course"
       />
     </form>
   </div>
@@ -28,12 +34,16 @@
   >
     <button
     type="button"
-    mat-button class="" (click)="cancelDialog()">Cancelar</button>
+    mat-button class="" (click)="cancelDialog()">
+    Cancelar
+  </button>
+
+
     <button
     type="button"
       mat-button
       class="rounded-md bg-green-400 px-4 py-2 text-lg text-gray-900 hover:bg-green-500"
-      (click)="closeDialog()"
+      (click)="salvar()"
     >
       Salvar
     </button>
