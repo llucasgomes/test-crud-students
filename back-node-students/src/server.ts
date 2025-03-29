@@ -6,7 +6,10 @@ import studentRoutes from './routes/student.route'
 const server: FastifyInstance = fastify()
 
 //Plugins
-server.register(fastifyCors)
+server.register(fastifyCors, {
+  origin: '*', // Permite requisições do Angular
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Permite DELETE
+})
 
 //rotas
 server.get('/', (req: FastifyRequest, replay: FastifyReply) => {
