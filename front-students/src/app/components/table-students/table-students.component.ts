@@ -3,15 +3,18 @@ import {
   AfterViewInit,
   Component,
   EventEmitter,
+  inject,
   Input,
   OnChanges,
   Output,
   ViewChild
 } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
+import { MatDialog } from '@angular/material/dialog'
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator'
 import { MatTableDataSource, MatTableModule } from '@angular/material/table'
 import { Student } from '../../@types'
+import { DialogUpdateComponent } from '../dialog-update/dialog-update.component'
 
 // Dados de exemplo
 // const students: IStudent[] = [
@@ -61,13 +64,16 @@ import { Student } from '../../@types'
 export class TableStudentsComponent implements AfterViewInit, OnChanges {
   @Input() data!: Student[]
   @Output() deleteStudent = new EventEmitter<Student>()
+  @Output() updateStudent = new EventEmitter<Student>()
+
+  readonly dialog = inject(MatDialog) // Injeção do MatDialog
 
   displayedColumns: string[] = [
-    'id',
+    // 'id',
     'name',
     'email',
     'course',
-    'enrollmentDate',
+    // 'enrollmentDate',
     'actions'
   ]
   dataSource = new MatTableDataSource<Student>()
@@ -96,7 +102,15 @@ export class TableStudentsComponent implements AfterViewInit, OnChanges {
 
   // Métodos para os botões
   onEdit(student: Student): void {
-    console.log('Edit:', student)
+    const dialogRef = this.dialog.open(DialogUpdateComponent, {
+      data: student // Passa os dados do aluno para o dialog
+    })
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.updateStudent.emit(result)
+      }
+    })
   }
 
   onDelete(student: Student): void {

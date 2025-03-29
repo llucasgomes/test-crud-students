@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject, OnInit } from '@angular/core'
+import { ReactiveFormsModule } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { RouterOutlet } from '@angular/router'
 import { Student } from './@types'
@@ -13,7 +14,8 @@ import { StudentService } from './service/student.service'
     RouterOutlet,
     ButtonComponent,
     TableStudentsComponent,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -29,13 +31,22 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.studentService.getAllStudents().subscribe((data) => {
       this.STUDENTS = data
-      console.log(data)
     })
   }
 
   deleteStudent(student: Student): void {
     this.studentService
       .deleteStudent(student)
+      .subscribe(() =>
+        this.studentService
+          .getAllStudents()
+          .subscribe((data) => (this.STUDENTS = data))
+      )
+  }
+
+  updateStudent(student: Student): void {
+    this.studentService
+      .update(student)
       .subscribe(() =>
         this.studentService
           .getAllStudents()
