@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "NxpPzOTaMjJqvkpw5T6rOeLGEPcDe+PpHztLrQPDURY=",
+  "Source": "back-aspnet-students",
+  "BasePath": "_content/back-aspnet-students",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
