@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common'
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
+  Output,
   ViewChild
 } from '@angular/core'
 import { MatButtonModule } from '@angular/material/button'
@@ -58,6 +60,7 @@ import { Student } from '../../@types'
 })
 export class TableStudentsComponent implements AfterViewInit, OnChanges {
   @Input() data!: Student[]
+  @Output() deleteStudent = new EventEmitter<Student>()
 
   displayedColumns: string[] = [
     'id',
@@ -97,6 +100,6 @@ export class TableStudentsComponent implements AfterViewInit, OnChanges {
   }
 
   onDelete(student: Student): void {
-    console.log('Delete:', student)
+    this.deleteStudent.emit(student)
   }
 }

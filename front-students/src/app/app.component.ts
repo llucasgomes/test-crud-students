@@ -30,4 +30,15 @@ export class AppComponent implements OnInit {
       console.log(data)
     })
   }
+
+  deleteStudent(student: Student): void {
+    this.studentService
+      .deleteStudent(student)
+      .subscribe(
+        () =>
+          (this.STUDENTS = this.STUDENTS.filter(
+            (item) => item.id != student.id
+          ))
+      )
+  }
 }

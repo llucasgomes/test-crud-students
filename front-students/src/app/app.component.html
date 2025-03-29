@@ -12,7 +12,7 @@
   </div>
   <div class="p-8 pt-0">
     <!-- <StudentTable /> -->
-    <app-table-students [data]="STUDENTS"></app-table-students>
+    <app-table-students [data]="STUDENTS" (deleteStudent)="deleteStudent($event)"></app-table-students>
   </div>
 </main>
 
