@@ -1,0 +1,6 @@
+@back_aspnet_students_HostAddress = http://localhost:5127
+
+GET {{back_aspnet_students_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

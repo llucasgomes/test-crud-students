@@ -1,0 +1,32 @@
+# Diretório do Visual Studio
+.vscode/
+
+# Build e binários
+*.exe
+*.dll
+*.pdb
+*.user
+*.sqlite
+
+# Diretórios gerados
+bin/
+obj/
+TestResults/
+
+# Cache de pacotes e dependências
+*.nupkg
+*.snupkg
+packages/
+.vs/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.log~
+
+# Configurações locais
+#appsettings.local.json
+
+# Dados do sistema operacional
+Thumbs.db
+.DS_Store
