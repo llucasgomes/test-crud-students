@@ -11,3 +11,21 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.toast-message {
+  &.toast-success {
+    border-left: 3px solid #22c55e;
+  }
+
+  &.toast-error {
+    border-left: 3px solid #ef4444;
+  }
+
+  &.toast-info {
+    border-left: 3px solid #3b82f6;
+  }
+
+  &.toast-warning {
+    border-left: 3px solid #f59e0b;
+  }
+}

@@ -13,7 +13,9 @@
   <div class="p-8 pt-0">
     <!-- <StudentTable /> -->
     <app-table-students [data]="STUDENTS" (deleteStudent)="deleteStudent($event)" (updateStudent)="updateStudent($event)"></app-table-students>
+    <ng-toast></ng-toast>
   </div>
+  <!-- <ng-toast [width]="300" [position]="ToasterPosition.TOP_CENTER"></ng-toast> -->
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

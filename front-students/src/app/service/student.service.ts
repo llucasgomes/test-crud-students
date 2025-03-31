@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpResponse } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { Student } from './../@types/index'
@@ -7,7 +7,7 @@ import { Student } from './../@types/index'
   providedIn: 'root'
 })
 export class StudentService {
-  apiURl = 'http://localhost:3000/student'
+  apiURl = 'http://localhost:3000/students'
 
   constructor(private http: HttpClient) {}
 
@@ -15,15 +15,21 @@ export class StudentService {
     return this.http.get<Student[]>(this.apiURl)
   }
 
-  deleteStudent(student: Student): Observable<Student> {
-    return this.http.delete<Student>(`${this.apiURl}/${student.id}`)
+  deleteStudent(student: Student): Observable<HttpResponse<Student>> {
+    return this.http.delete<Student>(`${this.apiURl}/${student.id}`, {
+      observe: 'response'
+    })
   }
 
-  createStudent(student: Student): Observable<Student> {
-    return this.http.post<Student>(this.apiURl, student)
+  createStudent(student: Student): Observable<HttpResponse<Student>> {
+    return this.http.post<Student>(this.apiURl, student, {
+      observe: 'response'
+    })
   }
 
-  update(student: Student): Observable<Student> {
-    return this.http.put<Student>(`${this.apiURl}/${student.id}`, student)
+  update(student: Student): Observable<HttpResponse<Student>> {
+    return this.http.put<Student>(`${this.apiURl}/${student.id}`, student, {
+      observe: 'response'
+    })
   }
 }
