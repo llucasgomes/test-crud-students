@@ -23,14 +23,14 @@ public class StudentsController : ControllerBase
    [HttpGet]
    public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
    {
-    return await _context.Students.ToListAsync();
+    return await _context.Student.ToListAsync();
    }
 
    // GET: students/{id}
    [HttpGet("{id}")]
    public async Task<ActionResult<Student>> GetStudent(String id)
    {
-    var student = await _context.Students.FindAsync(id);
+    var student = await _context.Student.FindAsync(id);
 
     if (student == null)
     {
@@ -45,28 +45,28 @@ public class StudentsController : ControllerBase
    public async Task<ActionResult<Student>> PostStudent(Student student)
    {
     // Gerar o ID automaticamente
-    student.Id = "ccuid-" + Guid.NewGuid().ToString();
+    student.id = "ccuid-" + Guid.NewGuid().ToString();
 
-    student.CreatedAt = DateTime.UtcNow;
-    student.UpdatedAt = DateTime.UtcNow;
+    student.createdAt = DateTime.UtcNow;
+    student.updatedAt = DateTime.UtcNow;
 
-    _context.Students.Add(student);
+    _context.Student.Add(student);
     await _context.SaveChangesAsync();
 
     // Corrigindo o CreatedAtAction para usar o caminho correto
-    return CreatedAtAction(nameof(GetStudent), new { id = student.Id }, student);
+    return CreatedAtAction(nameof(GetStudent), new { id = student.id }, student);
    }
 
    // PUT: students/{id}
     [HttpPut("{id}")]
     public async Task<IActionResult> PutStudent(string id, Student student)
     {
-        if (id != student.Id)
+        if (id != student.id)
         {
             return BadRequest();
         }
 
-        var existingStudent = await _context.Students.FindAsync(id);
+        var existingStudent = await _context.Student.FindAsync(id);
         if (existingStudent == null)
         {
             return NotFound();
@@ -74,23 +74,23 @@ public class StudentsController : ControllerBase
 
 
         // Verificar e atualizar os campos que foram passados na requisição
-        if (!string.IsNullOrEmpty(student.Name))
+        if (!string.IsNullOrEmpty(student.name))
         {
-            existingStudent.Name = student.Name;
+            existingStudent.name = student.name;
         }
 
-        if (!string.IsNullOrEmpty(student.Email))
+        if (!string.IsNullOrEmpty(student.email))
         {
-            existingStudent.Email = student.Email;
+            existingStudent.email = student.email;
         }
 
-        if (!string.IsNullOrEmpty(student.Course))
+        if (!string.IsNullOrEmpty(student.course))
         {
-            existingStudent.Course = student.Course;
+            existingStudent.course = student.course;
         }
 
 
-        existingStudent.UpdatedAt = DateTime.UtcNow;
+        existingStudent.updatedAt = DateTime.UtcNow;
 
         _context.Entry(existingStudent).State = EntityState.Modified;
         await _context.SaveChangesAsync();
@@ -102,13 +102,13 @@ public class StudentsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteStudent(string id)
     {
-        var student = await _context.Students.FindAsync(id);
+        var student = await _context.Student.FindAsync(id);
         if (student == null)
         {
             return NotFound();
         }
 
-        _context.Students.Remove(student);
+        _context.Student.Remove(student);
         await _context.SaveChangesAsync();
 
         return NoContent();
