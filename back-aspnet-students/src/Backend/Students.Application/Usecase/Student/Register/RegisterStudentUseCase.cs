@@ -1,13 +1,34 @@
-﻿using Students.Application.Services.AutoMapper;
+﻿using AutoMapper;
+using Students.Application.Services.AutoMapper;
 using Students.Communication.Request;
 using Students.Communication.Response;
+using Students.Domain.Entities;
+using Students.Domain.Repositories;
+using Students.Domain.Repositories.Student;
 using Students.Exception.ExceptionsBase;
 
 namespace Students.Application.Usecase.Student.Register;
-public class RegisterStudentUseCase
+public class RegisterStudentUseCase: IRegisterStudentUseCase
 {
+    private readonly IStudentWriteOnlyRepository _writeOnlyRepository;
+    private readonly IStudentReadOnlyRepository _readOnlyRepository;
+    private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ResponseStudentJson Execute(RequestRegisterStudentJson req)
+
+    public RegisterStudentUseCase(
+        IStudentWriteOnlyRepository writeOnlyRepository,
+        IStudentReadOnlyRepository readOnlyRepository,
+        IMapper mapper,
+        IUnitOfWork unitOfWork
+        )
+    {
+        _writeOnlyRepository = writeOnlyRepository;
+        _readOnlyRepository = readOnlyRepository;
+        _mapper = mapper;
+        _unitOfWork = unitOfWork;
+    }
+    public async Task<ResponseStudentJson> Execute(RequestRegisterStudentJson req)
     {
         //1º Validar a request 
           Validate(req);
@@ -18,18 +39,25 @@ public class RegisterStudentUseCase
             opt.AddProfile<AutoMapping>();
         }).CreateMapper();
 
-        var studentDomain = autoMapper.Map<Domain.Entities.Student>(req);
+        var student = autoMapper.Map<Domain.Entities.Student>(req);
 
 
         //3º Persistir a entidade no banco de dados
-        var student = new ResponseStudentJson
-          {
-              Name = req.Name,
-              Email = req.Email,
-              Course = req.Course,
-         
-          };
-        return student;
+       
+
+        //var existStudent = await _readOnlyRepository.ExistStudentWithEmail(student.Email);
+
+        await _writeOnlyRepository.Add(student);
+
+        await _unitOfWork.Commit();
+
+        return new ResponseStudentJson
+        {
+            Id = student.Id,
+            Name = student.Name,
+            Email = student.Email,
+            Course = student.Course
+        };
     }
 
     private void Validate(RequestRegisterStudentJson req)

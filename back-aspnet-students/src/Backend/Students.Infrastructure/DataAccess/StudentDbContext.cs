@@ -7,6 +7,7 @@ public class StudentDbContext: DbContext
     {
 
     }
+                //tabela do banco de dados   ↓
     public DbSet<Domain.Entities.Student> Students { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

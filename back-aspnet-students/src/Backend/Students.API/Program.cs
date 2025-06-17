@@ -1,4 +1,6 @@
 using Students.API.Filters;
+using Students.Application;
+using Students.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,11 @@ builder.Services.AddSwaggerGen();
 
 // Registro de filtros global
 builder.Services.AddMvc(opt => opt.Filters.Add(typeof(ExceptionsFilters)));
+
+// Registro de injeções de  dependencias 
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
+
 
 var app = builder.Build();
 

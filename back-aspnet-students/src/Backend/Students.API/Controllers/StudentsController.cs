@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Students.Application.Usecase.Student.Register;
 using Students.Communication.Request;
@@ -22,10 +23,13 @@ public class StudentsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(ResponseStudentJson),StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status400BadRequest)]
-    public IActionResult Register([FromBody] RequestRegisterStudentJson req)
+    [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> Register(
+        [FromBody] RequestRegisterStudentJson req,
+        [FromServices] IRegisterStudentUseCase useCase)
     {
-        var usecase = new RegisterStudentUseCase();
-        var response = usecase.Execute(req);
+       
+        var response = await useCase.Execute(req);
         return Created(string.Empty,response);
     }
 }

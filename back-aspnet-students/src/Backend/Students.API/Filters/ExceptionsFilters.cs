@@ -1,6 +1,8 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Students.Communication.Response;
 using Students.Exception;
 using Students.Exception.ExceptionsBase;
@@ -17,7 +19,7 @@ public class ExceptionsFilters: IExceptionFilter
         }
         else
         {
-            
+            ThrowUnknowException(context);
         }
 
     }
@@ -53,6 +55,27 @@ public class ExceptionsFilters: IExceptionFilter
             // que o cliente nao vai querer ver isso
             context.Result = new ObjectResult(ResourceMessagesExeception.UNKNOWN_ERROR);
         }
+
+        if (context.Exception is DbUpdateException dbUpdateEx &&
+        dbUpdateEx.InnerException is SqliteException sqliteEx)
+        {
+            context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            if (sqliteEx.SqliteErrorCode == 5) // database is locked
+            {
+                context.Result = new ObjectResult("O banco de dados está temporariamente bloqueado. Tente novamente.");
+            }
+            else
+            {
+                context.Result = new ObjectResult("Erro no banco de dados. Contate o administrador.");
+            }
+
+            return;
+
+        }
+
+        // Tratamento padrão
+        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+        context.Result = new ObjectResult(ResourceMessagesExeception.UNKNOWN_ERROR);
 
     }
 }
