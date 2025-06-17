@@ -1,32 +1,75 @@
-# Diretório do Visual Studio
-.vscode/
-
-# Build e binários
-*.exe
-*.dll
-*.pdb
-*.user
-*.sqlite
-
-# Diretórios gerados
+# Build results
 bin/
 obj/
-TestResults/
 
-# Cache de pacotes e dependências
+# User-specific files
+*.user
+*.suo
+*.sln.docstates
+
+# Auto-generated files
+*.Generated.cs
+Generated_Code/
+
+# Backup & temp files
+*.bak
+*.tmp
+*.swp
+
+# Visual Studio
+.vs/
+.vscode/
+*.dbmdl
+*.pdb
+
+# Rider (JetBrains)
+.idea/
+*.sln.iml
+
+# ASP.NET
+appsettings.*.local.json
+appsettings.Development.json
+secrets.json
+
+# Entity Framework
+Migrations/
+
+# Logs
+logs/
+*.log
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet
 *.nupkg
 *.snupkg
+*.nuspec
+.nuget/
 packages/
-.vs/
 
-# Logs e arquivos temporários
-*.log
-*.tmp
-*.log~
+# Publish
+publish/
+out/
+artifacts/
 
-# Configurações locais
-#appsettings.local.json
+# TFS
+$tf/
 
-# Dados do sistema operacional
-Thumbs.db
-.DS_Store
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+# Local tools
+.localtoolsettings.json
+
+# Azure pipelines
+.azure-pipelines/
+
+# Docker
+**/*.container.config
+**/Dockerfile.*
+docker-compose.override.yml
